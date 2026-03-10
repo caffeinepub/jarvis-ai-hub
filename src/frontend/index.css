@@ -1,0 +1,253 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Fonts ── */
+@font-face {
+  font-family: "Sora";
+  src: url("/assets/fonts/Sora.woff2") format("woff2");
+  font-weight: 100 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/GeistMono.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Mona Sans";
+  src: url("/assets/fonts/MonaSans.woff2") format("woff2");
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* === JARVIS Dark Sci-Fi Palette === */
+    /* Background: deep navy black */
+    --background: 0.09 0.018 255;
+    --foreground: 0.95 0.02 200;
+
+    /* Cards: slightly lighter navy */
+    --card: 0.12 0.022 255;
+    --card-foreground: 0.95 0.02 200;
+
+    /* Popover */
+    --popover: 0.11 0.02 250;
+    --popover-foreground: 0.95 0.02 200;
+
+    /* Primary: electric cyan */
+    --primary: 0.78 0.18 195;
+    --primary-foreground: 0.05 0.02 255;
+
+    /* Secondary: muted slate-blue */
+    --secondary: 0.16 0.025 255;
+    --secondary-foreground: 0.85 0.04 200;
+
+    /* Muted */
+    --muted: 0.14 0.02 250;
+    --muted-foreground: 0.55 0.04 220;
+
+    /* Accent: bright cyan-teal */
+    --accent: 0.72 0.2 190;
+    --accent-foreground: 0.05 0.02 255;
+
+    /* Destructive: red-orange */
+    --destructive: 0.62 0.22 25;
+    --destructive-foreground: 0.98 0 0;
+
+    /* Borders & inputs */
+    --border: 0.78 0.18 195 / 20%;
+    --input: 0.78 0.18 195 / 12%;
+    --ring: 0.78 0.18 195;
+
+    /* Charts */
+    --chart-1: 0.78 0.18 195;
+    --chart-2: 0.72 0.2 160;
+    --chart-3: 0.65 0.22 280;
+    --chart-4: 0.75 0.2 230;
+    --chart-5: 0.62 0.22 25;
+
+    /* Sidebar */
+    --sidebar: 0.08 0.02 255;
+    --sidebar-foreground: 0.9 0.025 200;
+    --sidebar-primary: 0.78 0.18 195;
+    --sidebar-primary-foreground: 0.05 0.02 255;
+    --sidebar-accent: 0.14 0.025 250;
+    --sidebar-accent-foreground: 0.85 0.03 200;
+    --sidebar-border: 0.78 0.18 195 / 15%;
+    --sidebar-ring: 0.78 0.18 195;
+
+    /* Custom Jarvis tokens */
+    --cyan: 0.78 0.18 195;
+    --cyan-bright: 0.88 0.2 195;
+    --cyan-dim: 0.55 0.14 200;
+    --navy-dark: 0.07 0.02 255;
+    --navy-mid: 0.11 0.022 255;
+    --navy-light: 0.16 0.03 255;
+    --glow-cyan: 0 0 20px oklch(0.78 0.18 195 / 60%);
+    --glow-cyan-strong: 0 0 40px oklch(0.78 0.18 195 / 80%);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Sora", system-ui, sans-serif;
+    background-color: oklch(0.09 0.018 255);
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: oklch(0.1 0.02 255);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.78 0.18 195 / 40%);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.78 0.18 195 / 70%);
+  }
+}
+
+/* ── Jarvis Glow Effects ── */
+.glow-cyan {
+  box-shadow: 0 0 15px oklch(0.78 0.18 195 / 50%), 0 0 40px oklch(0.78 0.18 195 / 25%);
+}
+.glow-cyan-text {
+  text-shadow: 0 0 10px oklch(0.78 0.18 195 / 80%);
+}
+.glow-border {
+  border: 1px solid oklch(0.78 0.18 195 / 40%);
+  box-shadow: 0 0 10px oklch(0.78 0.18 195 / 20%), inset 0 0 10px oklch(0.78 0.18 195 / 5%);
+}
+
+/* ── Holographic Grid Background ── */
+.holo-grid {
+  background-image:
+    linear-gradient(oklch(0.78 0.18 195 / 5%) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(0.78 0.18 195 / 5%) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── HUD Scan Line ── */
+.scan-line::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, oklch(0.78 0.18 195 / 60%), transparent);
+  animation: scan 3s linear infinite;
+}
+
+@keyframes scan {
+  0% { top: 0%; }
+  100% { top: 100%; }
+}
+
+/* ── Arc Reactor ── */
+@keyframes arc-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+@keyframes rotate-ring {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes counter-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+.arc-reactor {
+  animation: arc-pulse 2s ease-in-out infinite;
+}
+.ring-rotate {
+  animation: rotate-ring 8s linear infinite;
+}
+.ring-counter-rotate {
+  animation: counter-rotate 6s linear infinite;
+}
+
+/* ── Typing dots ── */
+@keyframes typing-dot {
+  0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+}
+.typing-dot:nth-child(1) { animation: typing-dot 1.2s 0s infinite; }
+.typing-dot:nth-child(2) { animation: typing-dot 1.2s 0.2s infinite; }
+.typing-dot:nth-child(3) { animation: typing-dot 1.2s 0.4s infinite; }
+
+/* ── Hex pattern ── */
+.hex-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='52' viewBox='0 0 60 52' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 0 L45 0 L60 26 L45 52 L15 52 L0 26 Z' fill='none' stroke='rgba(0,220,255,0.06)' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 60px 52px;
+}
+
+/* ── Particle float ── */
+@keyframes float-up {
+  0% { transform: translateY(0px) translateX(0px); opacity: 0.6; }
+  50% { transform: translateY(-20px) translateX(5px); opacity: 1; }
+  100% { transform: translateY(0px) translateX(0px); opacity: 0.6; }
+}
+
+/* ── Game canvas container ── */
+.game-canvas-wrapper canvas {
+  display: block;
+  margin: 0 auto;
+}
+
+/* ── Card glow on hover ── */
+.card-hover-glow {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+.card-hover-glow:hover {
+  box-shadow: 0 0 20px oklch(0.78 0.18 195 / 35%), 0 0 60px oklch(0.78 0.18 195 / 15%);
+  border-color: oklch(0.78 0.18 195 / 60%);
+  transform: translateY(-2px);
+}
+
+/* ── Gradient text ── */
+.gradient-text {
+  background: linear-gradient(135deg, oklch(0.88 0.2 195), oklch(0.72 0.2 230));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Premium gradient ── */
+.premium-gradient {
+  background: linear-gradient(135deg, oklch(0.75 0.2 60), oklch(0.65 0.2 40));
+}
+
+/* ── Token progress bar ── */
+.token-bar {
+  background: linear-gradient(90deg, oklch(0.78 0.18 195), oklch(0.72 0.2 160));
+  box-shadow: 0 0 10px oklch(0.78 0.18 195 / 60%);
+}
+
+/* ── Image generation placeholder ── */
+.img-placeholder {
+  background: linear-gradient(135deg,
+    oklch(0.12 0.03 255),
+    oklch(0.16 0.04 220),
+    oklch(0.13 0.025 195)
+  );
+}
+
+/* ── Snake game ── */
+@keyframes snake-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
